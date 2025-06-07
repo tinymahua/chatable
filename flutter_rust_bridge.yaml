@@ -1,0 +1,3 @@
+rust_input: crate::api
+rust_root: chatable_rlib/
+dart_output: lib/src/rust
