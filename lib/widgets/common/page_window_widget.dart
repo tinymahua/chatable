@@ -7,7 +7,7 @@ import 'package:window_manager/window_manager.dart';
 
 @immutable
 class PageWindowWidget extends StatefulWidget {
-  PageWindowWidget({
+  const PageWindowWidget({
     super.key,
     required this.isHome,
     this.toolsSize = 48.0,
