@@ -1,5 +1,6 @@
 import 'package:chatable/events/events.dart';
 import 'package:chatable/events/ui_events.dart';
+import 'package:chatable/generated/i10n/app_localizations.dart';
 import 'package:chatable/models/app_config_models.dart';
 import 'package:chatable/models/language_config_model.dart';
 import 'package:chatable/pages/home_page.dart';
@@ -9,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:window_manager/window_manager.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fluent_ui/fluent_ui.dart' as fui;
 
 class ChatableApp extends StatefulWidget {

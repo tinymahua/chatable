@@ -21,7 +21,7 @@ class ChatableColors extends ThemeExtension<ChatableColors> {
   }
 
   @override
-  ChatableColors lerp(covariant ThemeExtension<ChatableColors>? other, double t) {
+  ChatableColors lerp(ThemeExtension<ChatableColors>? other, double t) {
     if (other is! ChatableColors) {
       return this;
     }
