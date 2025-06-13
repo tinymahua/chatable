@@ -7,6 +7,7 @@ import 'package:window_manager/window_manager.dart';
 
 initGetxInstances(){
   Get.put(AppConfigDb());
+  Get.put(ChatSessionsDb());
 }
 
 Future<void> main() async {

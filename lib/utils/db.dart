@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:chatable/models/app_config_models.dart';
 import 'package:chatable/models/appearance_config_model.dart';
+import 'package:chatable/models/chat_session_models.dart';
 import 'package:chatable/models/language_config_model.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -89,5 +90,50 @@ class AppConfigDb extends Db {
   @override
   Map<String, dynamic> serialize(dynamic value) {
     return value.toJson();
+  }
+}
+
+
+enum ChatSessionCreateStatus {
+  success,
+  exists,
+}
+
+
+class ChatSessionsDb extends Db {
+  static const String _dbName = 'chat_sessions.json';
+
+  ChatSessionsDb() : super._(_dbName);
+
+  @override
+  Future<String> initDb() async {
+    var dbPath = await getDbPath();
+
+    if (!File(dbPath).existsSync()) {
+      await File(dbPath).create(recursive: true);
+      write(ChatSessions(sessions: []));
+    }
+    return dbPath;
+  }
+
+  @override
+  ChatSessions deserialize(Map<String, dynamic> json) {
+    return ChatSessions.fromJson(json);
+  }
+
+  @override
+  Map<String, dynamic> serialize(dynamic value) {
+    return value.toJson();
+  }
+
+  Future<(ChatSessionItemRecord?, ChatSessionCreateStatus)> createSession(ChatSessionItemRecord record)async{
+    var sessions = await read<ChatSessions>();
+    if (sessions.sessions.indexWhere((e)=>e.filePath == record.filePath) > -1){
+      return (null, ChatSessionCreateStatus.exists);
+    }else{
+      sessions.sessions.add(record);
+      write(sessions);
+      return (record, ChatSessionCreateStatus.success);
+    }
   }
 }

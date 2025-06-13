@@ -1,23 +1,85 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class ChatableColors extends ThemeExtension<ChatableColors> {
   static Color lightBorderColor = const Color(0xffe6e6e6);
+  static Color lightWindowBorderColor = const Color(0xffe6e6e6);
+  static Color lightFloatBgColor = const Color(0xffd8eaf4);
+  static Color lightFloatBorderColor = Colors.transparent;
+  static Color lightFloatTextColor = const Color(0xff424242);
+  static Color lightWarningBlockBgColor = Colors.orange;
+  static Color lightWarningBlockTextColor = Colors.black54;
+
   static Color darkBorderColor = const Color(0xff3b3b3b);
+  static Color darkWindowBorderColor = const Color(0xff3b3b3b);
+  static Color darkFloatBgColor = const Color(0xff494949);
+  static Color darkFloatBorderColor =  Colors.transparent;
+  static Color darkFloatTextColor = const Color(0xffd6884e);
+  static Color darkWarningBlockBgColor = const Color(0xffd6884e);
+  static Color darkWarningBlockTextColor = Colors.black54;
 
   final Color borderColor;
+  final Color windowBorderColor;
+  final Color floatBgColor;
+  final Color floatBorderColor;
+  final Color floatTextColor;
+  final Color warningBlockBgColor;
+  final Color warningBlockTextColor;
 
-  ChatableColors({required this.borderColor});
+  ChatableColors({
+    required this.borderColor,
+    required this.windowBorderColor,
+    required this.floatBgColor,
+    required this.floatBorderColor,
+    required this.floatTextColor,
+    required this.warningBlockBgColor,
+    required this.warningBlockTextColor,
+  });
 
   static ChatableColors get light {
-    return ChatableColors(borderColor: lightBorderColor);
+    return ChatableColors(
+      borderColor: lightBorderColor,
+      windowBorderColor: lightWindowBorderColor,
+      floatBgColor: lightFloatBgColor,
+      floatBorderColor: lightFloatBorderColor,
+      floatTextColor: lightFloatTextColor,
+      warningBlockBgColor: lightWarningBlockBgColor,
+      warningBlockTextColor: lightWarningBlockTextColor,
+    );
   }
+
   static ChatableColors get dark {
-    return ChatableColors(borderColor: darkBorderColor);
+    return ChatableColors(
+      borderColor: darkBorderColor,
+      windowBorderColor: darkWindowBorderColor,
+      floatBgColor: darkFloatBgColor,
+      floatBorderColor: darkFloatBorderColor,
+      floatTextColor: darkFloatTextColor,
+      warningBlockBgColor: darkWarningBlockBgColor,
+      warningBlockTextColor: darkWarningBlockTextColor,
+    );
   }
 
   @override
-  ChatableColors copyWith({Color? withBorderColor}) {
-    return ChatableColors(borderColor: withBorderColor ??  borderColor);
+  ChatableColors copyWith({
+    Color? withBorderColor,
+    Color? withWindowBorderColor,
+    Color? withFloatBgColor,
+    Color? withFloatBorderColor,
+    Color? withFloatTextColor,
+    Color? withWarningBlockBgColor,
+    Color? withWarningBlockTextColor,
+  }) {
+    return ChatableColors(
+      borderColor: withBorderColor ?? borderColor,
+      windowBorderColor: withWindowBorderColor ?? windowBorderColor,
+      floatBgColor: withFloatBgColor ?? floatBgColor,
+      floatBorderColor: withFloatBorderColor ?? floatBorderColor,
+      floatTextColor: withFloatTextColor ?? floatTextColor,
+      warningBlockBgColor: withWarningBlockBgColor ?? warningBlockBgColor,
+      warningBlockTextColor: withWarningBlockTextColor ?? warningBlockTextColor,
+    );
   }
 
   @override
@@ -26,9 +88,33 @@ class ChatableColors extends ThemeExtension<ChatableColors> {
       return this;
     }
     return ChatableColors(
-      borderColor: Color.lerp(borderColor, other.borderColor, t)?? borderColor,
+      borderColor: Color.lerp(borderColor, other.borderColor, t) ?? borderColor,
+      windowBorderColor:
+          Color.lerp(windowBorderColor, other.windowBorderColor, t) ??
+          windowBorderColor,
+      floatBgColor:
+          Color.lerp(floatBgColor, other.floatBgColor, t) ?? floatBgColor,
+      floatBorderColor:
+          Color.lerp(floatBorderColor, other.floatBorderColor, t) ??
+          floatBorderColor,
+      floatTextColor:
+          Color.lerp(floatTextColor, other.floatTextColor, t) ?? floatTextColor,
+      warningBlockBgColor: Color.lerp(
+              warningBlockBgColor, other.warningBlockBgColor, t) ??
+          warningBlockBgColor,
+      warningBlockTextColor: Color.lerp(warningBlockTextColor, other.warningBlockTextColor, t) ??
+          warningBlockTextColor,
     );
   }
+}
+
+class ChatableTextSize {
+  static double tiny = 8.0;
+  static double small = 10.0;
+  static double medium = 12.0;
+  static double large = 14.0;
+  static double extraLarge = 16.0;
+  static double huge = 18.0;
 }
 
 class ChatableThemeData {
@@ -67,10 +153,11 @@ class ChatableThemeData {
         foregroundColor: lightOnCanvasColor,
         iconTheme: IconThemeData(color: lightToolIconColor, size: iconSize),
       ),
-      bottomAppBarTheme: BottomAppBarTheme(
-          color: lightCanvasColor
+      bottomAppBarTheme: BottomAppBarTheme(color: lightCanvasColor),
+      dividerTheme: DividerThemeData(
+        color: lightCanvasColor,
+        thickness: dividerThickness,
       ),
-      dividerTheme: DividerThemeData(color: lightCanvasColor, thickness: dividerThickness),
       scaffoldBackgroundColor: lightSurfaceColor,
       colorScheme: ColorScheme(
         brightness: ChatableThemeData.lightBrightness,
@@ -84,9 +171,7 @@ class ChatableThemeData {
         onSurface: lightOnSurfaceColor,
         surfaceContainer: lightSurfaceColor,
       ),
-      extensions: <ThemeExtension<dynamic>>[
-        ChatableColors.light,
-      ],
+      extensions: <ThemeExtension<dynamic>>[ChatableColors.light],
     );
   }
 
@@ -98,10 +183,11 @@ class ChatableThemeData {
         foregroundColor: darkOnCanvasColor,
         iconTheme: IconThemeData(color: darkToolIconColor, size: iconSize),
       ),
-      bottomAppBarTheme: const BottomAppBarTheme(
-        color: Color(0xff262626),
+      bottomAppBarTheme: const BottomAppBarTheme(color: Color(0xff262626)),
+      dividerTheme: DividerThemeData(
+        color: darkCanvasColor,
+        thickness: dividerThickness,
       ),
-      dividerTheme: DividerThemeData(color: darkCanvasColor, thickness: dividerThickness),
       scaffoldBackgroundColor: darkSurfaceColor,
       colorScheme: ColorScheme(
         brightness: ChatableThemeData.darkBrightness,
@@ -115,9 +201,7 @@ class ChatableThemeData {
         onSurface: darkOnSurfaceColor,
         surfaceContainer: darkSurfaceColor,
       ),
-      extensions: <ThemeExtension<dynamic>>[
-        ChatableColors.dark,
-      ],
+      extensions: <ThemeExtension<dynamic>>[ChatableColors.dark],
       // ...
     );
   }

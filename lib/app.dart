@@ -9,6 +9,7 @@ import 'package:chatable/utils/db.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:fluent_ui/fluent_ui.dart' as fui;
 
@@ -61,23 +62,25 @@ class _ChatableAppState extends State<ChatableApp> {
     supportedLocales.addAll(AppLocalizations.supportedLocales);
     supportedLocales.addAll(fui.FluentLocalizations.supportedLocales);
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      locale: languageConfig != null ? Locale(languageConfig!.languageCode, languageConfig!.countryCode) :const Locale('en', 'US'),
-      localizationsDelegates: localizationsDelegates,
-      supportedLocales: supportedLocales,
-      theme: ChatableThemeData.lightTheme,
-      darkTheme: ChatableThemeData.darkTheme,
-      themeMode: themeMode,
-      builder: (context, child) => virtualWindowFrameBuilder(context, child),
-      home: GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        onPanStart: (details)async {
-          if (!await windowManager.isMaximized()){
-            windowManager.startDragging();
-          }
-        },
-        child: HomePage(),
+    return OKToast(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        locale: languageConfig != null ? Locale(languageConfig!.languageCode, languageConfig!.countryCode) :const Locale('en', 'US'),
+        localizationsDelegates: localizationsDelegates,
+        supportedLocales: supportedLocales,
+        theme: ChatableThemeData.lightTheme,
+        darkTheme: ChatableThemeData.darkTheme,
+        themeMode: themeMode,
+        builder: (context, child) => virtualWindowFrameBuilder(context, child),
+        home: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onPanStart: (details)async {
+            // if (!await windowManager.isMaximized()){
+            //   windowManager.startDragging();
+            // }
+          },
+          child: HomePage(),
+        ),
       ),
     );
   }

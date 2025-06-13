@@ -1,5 +1,7 @@
+import 'package:chatable/theme.dart';
 import 'package:chatable/widgets/common/page_window_widget.dart';
 import 'package:chatable/widgets/partials/chat_box_widget.dart';
+import 'package:chatable/widgets/partials/chat_session_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -12,7 +14,7 @@ class HomePage extends StatelessWidget {
       children: [
         Expanded(child: Container()),
         SizedBox(
-          height: 60,
+          height: 100,
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -24,9 +26,20 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  Widget buildSidebar(BuildContext context){
+    return Column(
+      children: [
+        Expanded(child: ChatSessionListWidget()),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return PageWindowWidget(
-      isHome: true, content: buildContent(context), sidebar: null, extra: null,);
+    return Container(
+      decoration: BoxDecoration(border: Border.all(color: Theme.of(context).extension<ChatableColors>()!.windowBorderColor)),
+      child: PageWindowWidget(
+        isHome: true, content: buildContent(context), sidebar: buildSidebar(context), extra: null,),
+    );
   }
 }
