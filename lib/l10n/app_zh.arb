@@ -8,7 +8,14 @@
         "example": "狂徒张三"
       }
     }
-  }
+  },
+
+    "tableFileMetaRowsCount": "行数",
+    "tableFileMetaSize": "大小",
+    "tableFileMetaColumns": "包含列",
+
+    "tableDetailSummary": "摘要",
+    "tableDetailOperations": "操作记录"
 }
 
 

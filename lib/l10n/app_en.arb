@@ -8,7 +8,14 @@
         "example": "Bob"
       }
     }
-  }
+  },
+
+  "tableFileMetaRowsCount": "Rows",
+  "tableFileMetaSize": "Size",
+  "tableFileMetaColumns": "Columns",
+
+  "tableDetailSummary": "Summary",
+  "tableDetailOperations": "Operate History"
 }
 
 

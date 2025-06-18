@@ -12,4 +12,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String hello(String userName) {
     return 'Hello $userName.';
   }
+
+  @override
+  String get tableFileMetaRowsCount => 'Rows';
+
+  @override
+  String get tableFileMetaSize => 'Size';
+
+  @override
+  String get tableFileMetaColumns => 'Columns';
+
+  @override
+  String get tableDetailSummary => 'Summary';
+
+  @override
+  String get tableDetailOperations => 'Operate History';
 }

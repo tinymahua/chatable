@@ -100,6 +100,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Hello {userName}.'**
   String hello(String userName);
+
+  /// No description provided for @tableFileMetaRowsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Rows'**
+  String get tableFileMetaRowsCount;
+
+  /// No description provided for @tableFileMetaSize.
+  ///
+  /// In en, this message translates to:
+  /// **'Size'**
+  String get tableFileMetaSize;
+
+  /// No description provided for @tableFileMetaColumns.
+  ///
+  /// In en, this message translates to:
+  /// **'Columns'**
+  String get tableFileMetaColumns;
+
+  /// No description provided for @tableDetailSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Summary'**
+  String get tableDetailSummary;
+
+  /// No description provided for @tableDetailOperations.
+  ///
+  /// In en, this message translates to:
+  /// **'Operate History'**
+  String get tableDetailOperations;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

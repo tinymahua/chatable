@@ -4,3 +4,8 @@ class ChatSessionCreatedEvent {
   final ChatSessionItemRecord record;
   ChatSessionCreatedEvent(this.record);
 }
+
+class ChatSessionSwitchedEvent {
+  final ChatSessionItemRecord record;
+  ChatSessionSwitchedEvent(this.record);
+}

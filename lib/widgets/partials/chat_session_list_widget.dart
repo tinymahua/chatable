@@ -62,9 +62,7 @@ class _ChatSessionListWidgetState extends State<ChatSessionListWidget> {
           },
           child: GestureDetector(
             onTap: (){
-              setState(() {
-                selectedIndex = index;
-              });
+              switchChatSession(index);
             },
             child: Container(
                 decoration: BoxDecoration(color: hoveredColor,
@@ -77,5 +75,12 @@ class _ChatSessionListWidgetState extends State<ChatSessionListWidget> {
     }, separatorBuilder: (BuildContext context, int index) {
       return SizedBox(height: 2,);
     }, itemCount: sessionItemRecords.length);
+  }
+
+  switchChatSession(int index){
+    setState(() {
+      selectedIndex = index;
+    });
+    eventBus.fire(ChatSessionSwitchedEvent(sessionItemRecords[index]));
   }
 }

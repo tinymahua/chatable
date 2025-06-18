@@ -1,6 +1,7 @@
 import 'package:chatable/theme.dart';
 import 'package:chatable/widgets/common/page_window_widget.dart';
 import 'package:chatable/widgets/partials/chat_box_widget.dart';
+import 'package:chatable/widgets/partials/chat_msgs_widget.dart';
 import 'package:chatable/widgets/partials/chat_session_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -12,7 +13,7 @@ class HomePage extends StatelessWidget {
   Widget buildContent(BuildContext context){
     return Column(
       children: [
-        Expanded(child: Container()),
+        Expanded(child: ChatMsgsPagesWidget()),
         SizedBox(
           height: 100,
           child: Row(
