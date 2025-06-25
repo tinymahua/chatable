@@ -261,6 +261,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_colorful_tab_keep:
+    dependency: "direct main"
+    description:
+      name: flutter_colorful_tab_keep
+      sha256: "34dc00862afa5bf524d6dc9a6ccc8ea0356ba44127dec0fd3f39ec7f84a1bbd9"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.2"
   flutter_driver:
     dependency: transitive
     description: flutter

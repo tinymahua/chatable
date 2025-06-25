@@ -225,7 +225,10 @@ class _ChatSessionDetailWidgetState extends State<ChatSessionDetailWidget> with 
           height: 45,
           child: ChatMsgsHeaderWidget(sessionRecord: widget.sessionRecord,),
         ),
-        TabBar(tabs: [
+        TabBar(
+          tabAlignment: TabAlignment.start,
+          isScrollable: true,
+          tabs: [
           Tab(text: AppLocalizations.of(context)!.tableDetailSummary,),
           Tab(text: AppLocalizations.of(context)!.tableDetailOperations,),
         ], controller: tabController!,
