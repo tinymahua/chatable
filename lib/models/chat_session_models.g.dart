@@ -25,6 +25,7 @@ Map<String, dynamic> _$ChatSessionItemRecordToJson(
 };
 
 const _$TableFileTypeEnumMap = {
+  TableFileType.unexpected: 'unexpected',
   TableFileType.csv: 'csv',
   TableFileType.xlsx: 'xlsx',
 };

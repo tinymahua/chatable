@@ -2,9 +2,11 @@ import 'package:chatable/events/chat_session_events.dart';
 import 'package:chatable/events/events.dart';
 import 'package:chatable/generated/i10n/app_localizations.dart';
 import 'package:chatable/models/chat_session_models.dart';
+import 'package:chatable/models/table_obj_models.dart';
 import 'package:chatable/src/rust/api/table_file.dart';
 import 'package:chatable/widgets/common/keep_alive_wrapper.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_column_list_view/multi_column_list_view.dart';
 
 
 @immutable
@@ -58,16 +60,99 @@ class _ChatMsgsHeaderWidgetState extends State<ChatMsgsHeaderWidget> {
 
 /// Summary Tab
 class ChatMsgsSummaryWidget extends StatefulWidget {
-  const ChatMsgsSummaryWidget({super.key});
+  const ChatMsgsSummaryWidget({super.key, required this.sessionRecord});
+
+  final ChatSessionItemRecord sessionRecord;
+
 
   @override
   State<ChatMsgsSummaryWidget> createState() => _ChatMsgsSummaryWidgetState();
 }
 
 class _ChatMsgsSummaryWidgetState extends State<ChatMsgsSummaryWidget> {
+
+  List<(int, String)> columnAttrsLabels = [];
+
+  TableStats? tableStats;
+
+  bool dataLoaded = false;
+
+  List<double> columnWidths = [];
+  final MultiColumnListController multiColumnListController = MultiColumnListController();
+
+  @override
+  void initState() {
+    super.initState();
+    setupEvents();
+  }
+
+  setupEvents()async{
+    var statsResult = await statsFile(path: widget.sessionRecord.filePath);
+    setState(() {
+      tableStats = TableStats.fromStatsInfo(statsResult.$1, statsResult.$2);
+      dataLoaded = true;
+    });
+    setState(() {
+      columnWidths = List.generate(tableStats!.attrKeys.length, (index) => 60.0);
+      multiColumnListController.rows.value = tableStats!.columns;
+    });
+    print(tableStats!.toJson());
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(child: Text('Summary TODO'),);
+    var localStrings = AppLocalizations.of(context)!;
+
+    int columnStatColTypePos = 1;
+
+    List<(int, String)> columnAttrsLabels = [
+      (0, localStrings.tableColumnStatColIndex),
+      (1, localStrings.tableColumnStatColType),
+      (2, localStrings.tableColumnStatColName),
+      (3, localStrings.tableColumnStatColMin),
+      (4, localStrings.tableColumnStatColMax),
+      (5, localStrings.tableColumnStatColMinStr),
+      (6, localStrings.tableColumnStatColMaxStr),
+      (7, localStrings.tableColumnStatColMean),
+      (8, localStrings.tableColumnStatColUnique),
+      (9, localStrings.tableColumnStatColNull),
+      (10, localStrings.tableColumnStatColTotal),
+    ];
+
+    List<int> displayIndexes = [2, 0, 1, 3, 4, 7, 10, 8, 9];
+
+    Map<String, String> columnTypeLabels = {
+      "int": localStrings.tableColumnStatColTypeInt,
+      "float": localStrings.tableColumnStatColTypeFloat,
+      "string": localStrings.tableColumnStatColTypeString,
+      "null": localStrings.tableColumnStatColTypeNull,
+    };
+
+    return dataLoaded ? MultiColumnListView(
+      controller: multiColumnListController,
+        columnWidths: columnWidths,
+        columnTitles: List.generate(displayIndexes.length, (int idx){
+          return Text(columnAttrsLabels[displayIndexes[idx]].$2);
+        }),
+        rowCellsBuilder: (BuildContext context, int rowIndex){
+          var val = multiColumnListController.rows.value[rowIndex] as TableColumn;
+          val.cleanAttrs();
+          return List.generate(displayIndexes.length, (int colIndex){
+            var attrKey = tableStats!.attrKeys[displayIndexes[colIndex]];
+            var cellValue = val.columnAttrs[attrKey];
+            var columnAttrPos = displayIndexes[colIndex];
+            if (columnAttrPos == columnStatColTypePos){
+              cellValue = columnTypeLabels[cellValue];
+            }
+            if (numberAttrKeys.contains(attrKey)){
+              if (!columnIsNumber(val.columnType)){
+                cellValue = '-';
+              }
+            }
+            return Text(cellValue);
+          });
+        }
+    ) : Container(child: Text('Loading...TODO'),);
   }
 }
 
@@ -75,7 +160,9 @@ class _ChatMsgsSummaryWidgetState extends State<ChatMsgsSummaryWidget> {
 /// History Tab
 
 class ChatMsgsHistoryWidget extends StatefulWidget {
-  const ChatMsgsHistoryWidget({super.key});
+  const ChatMsgsHistoryWidget({super.key, required this.sessionRecord});
+
+  final ChatSessionItemRecord sessionRecord;
 
   @override
   State<ChatMsgsHistoryWidget> createState() => _ChatMsgsHistoryWidgetState();
@@ -119,8 +206,8 @@ class _ChatSessionDetailWidgetState extends State<ChatSessionDetailWidget> with 
   makeTabs(){
     setState(() {
       tabViews = [
-        KeepAliveWrapper(child: ChatMsgsSummaryWidget()),
-        KeepAliveWrapper(child: ChatMsgsHistoryWidget()),
+        KeepAliveWrapper(child: ChatMsgsSummaryWidget(sessionRecord: widget.sessionRecord)),
+        KeepAliveWrapper(child: ChatMsgsHistoryWidget(sessionRecord: widget.sessionRecord)),
       ];
     });
 

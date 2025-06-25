@@ -119,6 +119,96 @@ abstract class AppLocalizations {
   /// **'Columns'**
   String get tableFileMetaColumns;
 
+  /// No description provided for @tableColumnStatColIndex.
+  ///
+  /// In en, this message translates to:
+  /// **'Index'**
+  String get tableColumnStatColIndex;
+
+  /// No description provided for @tableColumnStatColType.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get tableColumnStatColType;
+
+  /// No description provided for @tableColumnStatColName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get tableColumnStatColName;
+
+  /// No description provided for @tableColumnStatColMin.
+  ///
+  /// In en, this message translates to:
+  /// **'Min'**
+  String get tableColumnStatColMin;
+
+  /// No description provided for @tableColumnStatColMax.
+  ///
+  /// In en, this message translates to:
+  /// **'Max'**
+  String get tableColumnStatColMax;
+
+  /// No description provided for @tableColumnStatColMinStr.
+  ///
+  /// In en, this message translates to:
+  /// **'Min(Str)'**
+  String get tableColumnStatColMinStr;
+
+  /// No description provided for @tableColumnStatColMaxStr.
+  ///
+  /// In en, this message translates to:
+  /// **'Max(Str)'**
+  String get tableColumnStatColMaxStr;
+
+  /// No description provided for @tableColumnStatColMean.
+  ///
+  /// In en, this message translates to:
+  /// **'Mean'**
+  String get tableColumnStatColMean;
+
+  /// No description provided for @tableColumnStatColUnique.
+  ///
+  /// In en, this message translates to:
+  /// **'Unique'**
+  String get tableColumnStatColUnique;
+
+  /// No description provided for @tableColumnStatColNull.
+  ///
+  /// In en, this message translates to:
+  /// **'Null'**
+  String get tableColumnStatColNull;
+
+  /// No description provided for @tableColumnStatColTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Sum'**
+  String get tableColumnStatColTotal;
+
+  /// No description provided for @tableColumnStatColTypeInt.
+  ///
+  /// In en, this message translates to:
+  /// **'Number'**
+  String get tableColumnStatColTypeInt;
+
+  /// No description provided for @tableColumnStatColTypeString.
+  ///
+  /// In en, this message translates to:
+  /// **'Text'**
+  String get tableColumnStatColTypeString;
+
+  /// No description provided for @tableColumnStatColTypeFloat.
+  ///
+  /// In en, this message translates to:
+  /// **'Decimal'**
+  String get tableColumnStatColTypeFloat;
+
+  /// No description provided for @tableColumnStatColTypeNull.
+  ///
+  /// In en, this message translates to:
+  /// **'Empty Value'**
+  String get tableColumnStatColTypeNull;
+
   /// No description provided for @tableDetailSummary.
   ///
   /// In en, this message translates to:
